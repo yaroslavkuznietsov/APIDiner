@@ -80,5 +80,14 @@ namespace APIDinerApp.Controllers
             await _orderData.UpdateOrderName(data.Id, data.OrderName);
             return Ok();
         }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _orderData.DeleteOrder(id);
+            return Ok();
+        }
     }
 }
