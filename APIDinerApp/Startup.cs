@@ -35,6 +35,12 @@ namespace APIDinerApp
             services.AddSingleton<IDataAccess, SqlDb>();
             services.AddSingleton<IFoodData, FoodData>();
             services.AddSingleton<IOrderData, OrderData>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin", builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +54,8 @@ namespace APIDinerApp
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowOrigin");
 
             app.UseAuthorization();
 
